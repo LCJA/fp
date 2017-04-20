@@ -36,10 +36,10 @@ public class ZBController {
 	@ResponseBody
 	@RequestMapping(value = "/count/q",
 	method = RequestMethod.GET,produces = {"application/json;charset=UTF-8"})
-	public ApiResult countq(@RequestParam("type")String type,@RequestParam("openid")String openid){
+	public ApiResult countq(@RequestParam(value="type",required=false)String type,@RequestParam(value="openid",required=false)String openid){
 		logger.debug("type:{},openid:{}",type,openid);
-		if(!StringUtil.isEmpty(openid)&&!StringUtil.isEmpty(type)){
-			return zbService.insertFpCount(openid, type);
+		if(!StringUtil.isEmpty(openid)||!StringUtil.isEmpty(type)){
+			return zbService.getFpCount(openid, type);
 		}
 		return new ApiResult(ErrorCode.ERR_SYS_REQUEST_MISSING_PARAMETER);
 	}
@@ -56,6 +56,18 @@ public class ZBController {
 		}
 		if(!StringUtil.isEmpty(openid)){
 			return zbService.insertFpActive(openid, time);
+		}
+		return new ApiResult(ErrorCode.ERR_SYS_REQUEST_MISSING_PARAMETER);
+	}
+	
+
+	@ResponseBody
+	@RequestMapping(value = "/live/q",
+	method = RequestMethod.GET,produces = {"application/json;charset=UTF-8"})
+	public ApiResult liveq(@RequestParam("openid")String openid){
+		logger.debug("openid:{}",openid);
+		if(!StringUtil.isEmpty(openid)){
+			return zbService.getFpActive(openid);
 		}
 		return new ApiResult(ErrorCode.ERR_SYS_REQUEST_MISSING_PARAMETER);
 	}

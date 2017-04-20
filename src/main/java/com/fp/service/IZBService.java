@@ -8,8 +8,7 @@ public interface IZBService {
 		
 		public  ApiResult insertFpActive(String openid,long active);
 		
-		
 		public  ApiResult getFpCount(String openid,String type);
 		
-		public  ApiResult 	getFpActive(String openid);
+		public  ApiResult getFpActive(String openid);
 }

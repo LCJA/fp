@@ -14,6 +14,23 @@
  	insert into fp_active (openid,active,create_date,state)
  	 values(#{openid},#{active},NOW(),1);
  </insert>	
+ 
+ <select id="qActiveProcedure" statementType="CALLABLE">
+		call execute_query_active(
+		#{i_openid,jdbcType=VARCHAR,mode=IN},
+		#{v_avg,jdbcType=BIGINT,mode=OUT},
+		#{v_max,jdbcType=BIGINT,mode=OUT},
+		#{v_min,jdbcType=BIGINT,mode=OUT},
+		#{v_all,jdbcType=BIGINT,mode=OUT}
+		)
+	</select>
+	
+	<select id="queryFpCount" resultType="long">
+	select count(1) from fp_count where 1=1 
+	<if test="openid!=null">and openid=#{openid}</if>
+	<if test="type!=null">and btn_type=#{type}</if>
+	 and state=1
+	</select>
 	
  
 </mapper>
