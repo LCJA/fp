@@ -30,7 +30,7 @@ public class ZBController {
 			return zbService.insertFpCount(openid, type);
 		}
 		return new ApiResult(ErrorCode.ERR_SYS_REQUEST_MISSING_PARAMETER);
-	}
+	} 
 	
 	
 	@ResponseBody
