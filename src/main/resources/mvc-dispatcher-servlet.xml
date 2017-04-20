@@ -1,0 +1,33 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans     
+        http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-4.3.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
+        
+	<mvc:annotation-driven >
+		<mvc:message-converters>
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <constructor-arg value="UTF-8" />
+            </bean>
+        </mvc:message-converters>
+	</mvc:annotation-driven>
+	
+	<context:annotation-config />
+	
+	<context:component-scan base-package="com.fp.controller,com.fp.service,com.fp.dao" />
+	<context:property-placeholder location="classpath:ds.properties" />
+	
+	<mvc:cors>
+    	<mvc:mapping path="/fp/bodytest/**" />
+	</mvc:cors>
+	
+	<!-- 拦截器 -->
+	<mvc:interceptors>
+		<bean class="com.fp.core.CrossDomainInterceptor" />
+	</mvc:interceptors>
+</beans>

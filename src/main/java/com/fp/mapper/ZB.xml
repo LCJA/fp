@@ -1,0 +1,20 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper  namespace="com.fp.dao.ZBDao" >
+
+ 
+ 
+ <insert id="insertFpCount"   > 
+ 	insert into fp_count (openid,btn_type,create_date,state)
+ 	 values(#{openid},#{type},NOW(),1);
+ </insert>
+
+	<insert id="insertFpActive"   > 
+ 	insert into fp_active (openid,active,create_date,state)
+ 	 values(#{openid},#{active},NOW(),1);
+ </insert>	
+	
+ 
+</mapper>
+
