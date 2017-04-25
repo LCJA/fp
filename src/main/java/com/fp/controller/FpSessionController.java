@@ -24,7 +24,7 @@ public class FpSessionController {
 	
 	//登录
 	@ResponseBody
-	@RequestMapping(value = "/",
+	@RequestMapping(value = "",
 	method = RequestMethod.POST,produces = {"application/json;charset=UTF-8"})
 	public ApiResult Login(@RequestParam("userName")String userName,
 			@RequestParam("passWord")String passWord){

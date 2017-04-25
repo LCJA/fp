@@ -24,7 +24,7 @@ public class FpUSerController {
 	private IFpUserService fpUserservice;
 	//注册
 	@ResponseBody
-	@RequestMapping(value = "/",
+	@RequestMapping(value = "",
 	method = RequestMethod.POST,produces = {"application/json;charset=UTF-8"})
 	public ApiResult Register(@RequestParam("userName")String userName,
 			@RequestParam("passWord")String PassWord){
@@ -36,7 +36,7 @@ public class FpUSerController {
 	}
 	
 	//修改
-	@RequestMapping(value = "/",
+	@RequestMapping(value = "",
 			method = RequestMethod.PUT,produces = {"application/json;charset=UTF-8"})
 	public ApiResult modifyPassword(@RequestParam("userName")String userName,
 			@RequestParam("oldPassWord")String oldPassWord,
