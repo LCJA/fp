@@ -7,6 +7,6 @@
 <title>welcome!</title>
 </head>
 <body>
-	<script  src="/fivepeople/js/sojson.js"></script>
+	<script  src="/fivepeople/js/sojson.min.js"></script>
 </body>
 </html>
