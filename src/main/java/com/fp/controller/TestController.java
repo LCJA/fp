@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 /**
- * localhost:8080/seekang/test
+ *  localhost:8080/fivepeople/test
  *
  */
 @Controller

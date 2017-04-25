@@ -22,12 +22,17 @@
 	<context:component-scan base-package="com.fp.controller,com.fp.service,com.fp.dao" />
 	<context:property-placeholder location="classpath:ds.properties" />
 	
-	<mvc:cors>
-    	<mvc:mapping path="/fp/bodytest/**" />
-	</mvc:cors>
+	 <mvc:default-servlet-handler/> 
 	
 	<!-- 拦截器 -->
 	<mvc:interceptors>
 		<bean class="com.fp.core.CrossDomainInterceptor" />
 	</mvc:interceptors>
+	
+	
+	 <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean> 
 </beans>
