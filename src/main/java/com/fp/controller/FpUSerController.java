@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fp.core.ErrorCode;
+import com.fp.dto.ApiResult;
 import com.fp.service.IFpUserService;
 import com.fp.service.impl.FpUserServiceImpl;
 import com.fp.util.StringUtil;
-import com.fp.vo.ApiResult;
 
 @Controller
 @RequestMapping("/user")//url:/模块/资源/{id}/细分/

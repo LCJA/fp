@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fp.core.ErrorCode;
+import com.fp.dto.ApiResult;
 import com.fp.exception.ApplicationException;
 import com.fp.exception.BaseException;
-import com.fp.vo.ApiResult;
 
 @ControllerAdvice
 public class ExceptionController {

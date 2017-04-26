@@ -7,11 +7,11 @@ import org.springframework.stereotype.Service;
 
 import com.fp.core.ErrorCode;
 import com.fp.dao.FpUserDao;
+import com.fp.dto.ApiResult;
 import com.fp.model.FpUser;
 import com.fp.service.IFpUserService;
 import com.fp.util.CoderAndDecoder;
 import com.fp.util.StringUtil;
-import com.fp.vo.ApiResult;
 /**
  * 常量
  * @author LCJA

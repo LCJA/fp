@@ -1,6 +1,6 @@
 package com.fp.service;
 
-import com.fp.vo.ApiResult;
+import com.fp.dto.ApiResult;
 
 public interface IZBService {
 	

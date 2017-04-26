@@ -1,4 +1,4 @@
-package com.fp.vo;
+package com.fp.dto;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fp.core.ErrorCode;
