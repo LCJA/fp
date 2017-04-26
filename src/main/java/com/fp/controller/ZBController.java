@@ -1,5 +1,8 @@
 package com.fp.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +27,7 @@ public class ZBController {
 	@ResponseBody
 	@RequestMapping(value = "/count",
 	method = RequestMethod.POST,produces = {"application/json;charset=UTF-8"})
-	public ApiResult count(@RequestParam("type")String type,@RequestParam("openid")String openid){
+	public ApiResult count(@RequestParam("openid")String openid,@RequestParam("type")String type){
 		logger.debug("type:{},openid:{}",type,openid);
 		if(!StringUtil.isEmpty(openid)&&!StringUtil.isEmpty(type)){
 			return zbService.insertFpCount(openid, type);
@@ -34,7 +37,7 @@ public class ZBController {
 	
 	
 	@ResponseBody
-	@RequestMapping(value = "/count/q",
+	@RequestMapping(value = "/count",
 	method = RequestMethod.GET,produces = {"application/json;charset=UTF-8"})
 	public ApiResult countq(@RequestParam(value="type",required=false)String type,@RequestParam(value="openid",required=false)String openid){
 		logger.debug("type:{},openid:{}",type,openid);
@@ -62,7 +65,7 @@ public class ZBController {
 	
 
 	@ResponseBody
-	@RequestMapping(value = "/live/q",
+	@RequestMapping(value = "/live",
 	method = RequestMethod.GET,produces = {"application/json;charset=UTF-8"})
 	public ApiResult liveq(@RequestParam("openid")String openid){
 		logger.debug("openid:{}",openid);
@@ -71,5 +74,7 @@ public class ZBController {
 		}
 		return new ApiResult(ErrorCode.ERR_SYS_REQUEST_MISSING_PARAMETER);
 	}
+	
+
 	
 }

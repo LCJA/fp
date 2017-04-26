@@ -6,9 +6,9 @@ import org.apache.ibatis.annotations.Param;
 
 
 public interface ZBDao {
-	public  long queryFpCount(@Param("openid")String openid,@Param("type")String type);
+	public  Long queryFpCount(@Param("openid")String openid,@Param("type")String type);
 	
-	public  int insertFpCount(@Param("openid")String openid,@Param("type")String type);
+	public  int saveFpCount(@Param("openid")String openid,@Param("type")String type,@Param("count")String count);
 	
 	/*/**
 	 * 总时长

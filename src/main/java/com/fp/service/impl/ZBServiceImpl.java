@@ -2,6 +2,7 @@ package com.fp.service.impl;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +16,7 @@ import com.fp.dto.ApiResult;
 import com.fp.dto.ZBActDto;
 import com.fp.dto.ZBBtnDto;
 import com.fp.service.IZBService;
+import com.fp.util.StringUtil;
 
 @Service
 public class ZBServiceImpl implements IZBService{
@@ -23,8 +25,16 @@ public class ZBServiceImpl implements IZBService{
 	private static Logger logger = LoggerFactory.getLogger(ZBController.class);
 	@Override
 	public ApiResult insertFpCount(String openid, String type) {
-		int rtint = zbDao.insertFpCount(openid, type);
-		if(rtint>0){
+		int flag = 0;
+		Map<String,String>typeMap = StringUtil.turnMap(type);
+		if(typeMap==null){
+			return new ApiResult(ErrorCode.ERR_SYS_WRONG_PARAMETER);
+		}
+		Set<String> set = typeMap.keySet();
+		for(String s: set){
+			flag+= zbDao.saveFpCount(openid, s,typeMap.get(s));
+		}
+		if(flag==typeMap.size()){
 			return new ApiResult(ErrorCode.SUCCESS);
 		}
 		return new ApiResult(ErrorCode.ERR_SYS_INTERNAL_ERROR);
@@ -42,6 +52,7 @@ public class ZBServiceImpl implements IZBService{
 	@Override
 	public ApiResult getFpCount(String openid, String type) {
 		long count = zbDao.queryFpCount(openid, type);
+		logger.debug("count:{}",count);
 		 ZBBtnDto	zbdto = new ZBBtnDto();
 		zbdto.setOpenid(openid);
 		zbdto.setType(type);

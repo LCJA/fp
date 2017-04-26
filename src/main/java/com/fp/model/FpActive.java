@@ -10,6 +10,7 @@ public class FpActive {
 	private String ext3;
 	private String ext4;
 	private String ext5;
+	private String temp;
 	public String getOpenId() {
 		return openId;
 	}
@@ -63,6 +64,12 @@ public class FpActive {
 	}
 	public void setExt5(String ext5) {
 		this.ext5 = ext5;
+	}
+	public String getTemp() {
+		return temp;
+	}
+	public void setTemp(String temp) {
+		this.temp = temp;
 	}
 	
 	

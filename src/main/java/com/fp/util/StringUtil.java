@@ -3,7 +3,9 @@ package com.fp.util;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.util.List;
+import java.util.Map;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -483,5 +485,29 @@ public class StringUtil {
 	    }  
 	    return size;  
 	}  
+	
+	
+	public  static Map<String,String> turnMap(String str){
+		Map<String,String>rtMap = null;
+		if(!str.contains("{")||!str.contains("}")){
+			return rtMap;
+		}
+		if(str.contains("=")){
+			rtMap=new HashMap<String,String>();
+			String [] arrstr = str.split(",");
+			for(int i=0;i<arrstr.length;i++){
+				String [] temparr = arrstr[i].split("=");
+				if(i==0){
+					temparr[0]=temparr[0].substring(1, temparr[0].length());
+				}
+				if(i==arrstr.length-1){
+					temparr[1]=temparr[1].substring(0, temparr[1].length()-1);
+				}
+				rtMap.put(temparr[0].trim(), temparr[1].trim());
+			}
+		}
+		return rtMap;
+	}
 
+	
 }
