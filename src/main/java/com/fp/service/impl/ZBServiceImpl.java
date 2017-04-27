@@ -38,6 +38,9 @@ public class ZBServiceImpl implements IZBService{
 			return new ApiResult(ErrorCode.SUCCESS);
 		}*/
 		int flag = zbDao.saveFpCount(openid, type, 1L);
+		if(flag>0){
+			return new ApiResult(ErrorCode.SUCCESS);
+		}
 		return new ApiResult(ErrorCode.ERR_SYS_INTERNAL_ERROR);
 	}
 
