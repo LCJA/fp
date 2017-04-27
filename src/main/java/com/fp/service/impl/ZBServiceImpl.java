@@ -55,12 +55,16 @@ public class ZBServiceImpl implements IZBService{
 
 	@Override
 	public ApiResult getFpCount(String openid, String type) {
-		long count = zbDao.queryFpCount(openid, type);
+		Long count = zbDao.queryFpCount(openid, type);
 		logger.debug("count:{}",count);
 		 ZBBtnDto	zbdto = new ZBBtnDto();
 		zbdto.setOpenid(openid);
 		zbdto.setType(type);
-		zbdto.setCount(count);
+		if(count!=null){
+			zbdto.setCount(count);
+		}else{
+			zbdto.setCount(-1L);
+		}
 		ApiResult apiresult = new ApiResult(ErrorCode.SUCCESS);
 		apiresult.setData(zbdto);
 		return apiresult;
