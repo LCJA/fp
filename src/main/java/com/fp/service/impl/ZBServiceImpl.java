@@ -25,7 +25,7 @@ public class ZBServiceImpl implements IZBService{
 	private static Logger logger = LoggerFactory.getLogger(ZBController.class);
 	@Override
 	public ApiResult insertFpCount(String openid, String type) {
-		int flag = 0;
+		/*int flag = 0;
 		Map<String,String>typeMap = StringUtil.turnMap(type);
 		if(typeMap==null){
 			return new ApiResult(ErrorCode.ERR_SYS_WRONG_PARAMETER);
@@ -36,7 +36,8 @@ public class ZBServiceImpl implements IZBService{
 		}
 		if(flag==typeMap.size()){
 			return new ApiResult(ErrorCode.SUCCESS);
-		}
+		}*/
+		int flag = zbDao.saveFpCount(openid, type, 1L);
 		return new ApiResult(ErrorCode.ERR_SYS_INTERNAL_ERROR);
 	}
 
@@ -81,5 +82,5 @@ public class ZBServiceImpl implements IZBService{
 		apiresult.setData(zbActDto);
 		return apiresult;
 	}
-
+	
 }
