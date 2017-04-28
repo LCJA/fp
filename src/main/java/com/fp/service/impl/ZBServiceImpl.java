@@ -1,5 +1,10 @@
 package com.fp.service.impl;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -11,10 +16,13 @@ import org.springframework.stereotype.Service;
 
 import com.fp.controller.ZBController;
 import com.fp.core.ErrorCode;
+import com.fp.dao.StaticDataDao;
 import com.fp.dao.ZBDao;
 import com.fp.dto.ApiResult;
 import com.fp.dto.ZBActDto;
 import com.fp.dto.ZBBtnDto;
+import com.fp.model.StaticData;
+import com.fp.model.Vension;
 import com.fp.service.IZBService;
 import com.fp.util.StringUtil;
 
@@ -22,6 +30,9 @@ import com.fp.util.StringUtil;
 public class ZBServiceImpl implements IZBService{
 	@Autowired
 	private ZBDao zbDao;
+	@Autowired
+	private StaticDataDao staticdatadao; 
+	
 	private static Logger logger = LoggerFactory.getLogger(ZBController.class);
 	@Override
 	public ApiResult insertFpCount(String openid, String type) {
@@ -88,6 +99,75 @@ public class ZBServiceImpl implements IZBService{
 		ApiResult apiresult = new ApiResult(ErrorCode.SUCCESS);
 		apiresult.setData(zbActDto);
 		return apiresult;
+	}
+
+	@Override
+	public ApiResult getNewVension() {
+		Vension vension =null;
+		vension =zbDao.queryNewVension();
+		if(vension!=null){
+			ApiResult result = new ApiResult(ErrorCode.SUCCESS);
+			result.setData(vension);
+			return 	result;
+		}
+		return new ApiResult(ErrorCode.ERR_SYS_INTERNAL_ERROR);
+	}
+
+	@Override
+	public ApiResult saveVension(String vension, String context) {
+		Vension vensionbean =new Vension();
+		vensionbean.setState(1);
+		vensionbean.setvId(vension);
+		vensionbean.setvContext(context);
+		int flag = zbDao.insertVension(vensionbean);
+		if(flag>0){
+			return new ApiResult(ErrorCode.SUCCESS);	
+		}
+		return new ApiResult(ErrorCode.ERR_SYS_INTERNAL_ERROR);
+	}
+
+	@Override
+	public ApiResult getDownLoad() {
+		StaticData staticdata =null;
+		staticdata = staticdatadao.queryStaticDataByKey("url");
+		if(staticdata!=null){
+			String url = staticdata.getDataValue();
+			if(!StringUtil.isEmpty(url)){
+				ApiResult result = new ApiResult(ErrorCode.SUCCESS);
+				logger.debug("url:{}",url);
+				result.setData(url);
+				return 	result;
+			}
+		}
+		return new ApiResult(ErrorCode.ERR_SYS_INTERNAL_ERROR);
+	}
+
+	@SuppressWarnings("finally")
+	@Override
+	public byte[] downUrl() {
+		 byte[] body = null;
+		 InputStream is =null;
+		String path = Thread.currentThread().getContextClassLoader().getResource("").getPath();
+		File file = new File(path+"/download/apk.apk");
+		 try {
+			 is = new FileInputStream(file);
+			 body = new byte[is.available()];
+			 is.read(body);
+			
+		} catch (FileNotFoundException e) {
+			logger.debug("{}",e);
+			
+		} catch (IOException e) {
+			logger.debug("{}",e);
+		}finally{
+			try {
+				is.close();
+			} catch (IOException e) {
+				logger.debug("{}",e);
+			}
+			return body;
+		}
+		
 	}
 	
 }

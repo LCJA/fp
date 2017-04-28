@@ -40,6 +40,15 @@
 	 and state=1
 	</select>
 	
+	
+	 <insert id="insertVension"  parameterType="Vension" useGeneratedKeys="true" keyProperty="id" > 
+ 		insert into vension (v_id,v_context,create_date,update_date,state,ext1,ext2,ext3,ext4,ext5)
+ 		 values(#{vId},#{vContext},NOW(),NOW(),#{state},#{ext1},#{ext2},#{ext3},#{ext4},#{ext5});
+	 </insert>
+	 
+	 <select id="queryNewVension" resultType="Vension">
+		select * from vension where state=1 order by create_date desc limit 1
+	</select>
  
 </mapper>
 

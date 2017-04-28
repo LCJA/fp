@@ -4,6 +4,9 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.fp.model.StaticData;
+import com.fp.model.Vension;
+
 
 public interface ZBDao {
 	public  Long queryFpCount(@Param("openid")String openid,@Param("type")String type);
@@ -39,4 +42,9 @@ public interface ZBDao {
 	 */
 	
 	public void qActiveProcedure (Map<String,Object> paramMap);
+	
+	public int insertVension(Vension vension);
+	
+	public Vension queryNewVension();
+	
 }

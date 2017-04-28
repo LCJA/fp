@@ -3,6 +3,7 @@ package com.fp.core;
 public enum ErrorCode {
 	SUCCESS("0000", "成功"),
 	ERR_SYS_INTERNAL_ERROR("1000", "系统内部错误"),
+	ERR_SYS_RESPONSE_MISSING_PARAMETER("1006", "缺少响应参数"),
 	ERR_SYS_REQUEST_MISSING_PARAMETER("1007", "缺少输入参数"),
 	ERR_SYS_WRONG_PARAMETER("1008", "参数错误"),
 	ERR_USER_NOT_EXIST("2001", "用户不存在"),

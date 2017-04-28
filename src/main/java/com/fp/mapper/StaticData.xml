@@ -1,0 +1,18 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper  namespace="com.fp.dao.StaticDataDao" >
+
+ 
+	 <insert id="insertStaticData"  parameterType="StaticData" useGeneratedKeys="true" keyProperty="id" > 
+ 		insert into static_data (data_key,data_value,create_date,update_date,state,ext1,ext2,ext3,ext4,ext5)
+ 		 values(#{dataKey},#{dataValue},NOW(),NOW(),#{state},#{ext1},#{ext2},#{ext3},#{ext4},#{ext5});
+	 </insert>
+	 
+	 <select id="queryStaticDataByKey" resultType="StaticData">
+		select * from static_data where state=1 and data_key=#{dataKey}
+	</select>
+	
+ 
+</mapper>
+

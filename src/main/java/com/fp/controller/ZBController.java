@@ -1,11 +1,15 @@
 package com.fp.controller;
 
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -74,7 +78,42 @@ public class ZBController {
 		}
 		return new ApiResult(ErrorCode.ERR_SYS_REQUEST_MISSING_PARAMETER);
 	}
+	@ResponseBody
+	@RequestMapping(value = "/vension",
+	method = RequestMethod.GET,produces = {"application/json;charset=UTF-8"})
+	public ApiResult getVension(){
+			return zbService.getNewVension();
+	}
 	
+	@ResponseBody
+	@RequestMapping(value = "/vension",
+	method = RequestMethod.POST,produces = {"application/json;charset=UTF-8"})
+	public ApiResult saveVensionContext(@RequestParam("vension")String vension,@RequestParam("context")String context){
+		if(!StringUtil.isEmpty(vension)&&!StringUtil.isEmpty(context)){
+			return zbService.saveVension(vension, context);
+		}
+		return new ApiResult(ErrorCode.ERR_SYS_REQUEST_MISSING_PARAMETER);
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "/apk",
+	method = RequestMethod.GET,produces = {"application/json;charset=UTF-8"})
+	public ApiResult getDownLoad(){
+		return zbService.getDownLoad();
+	}
+	
+	@RequestMapping(value = "/down",
+	method = RequestMethod.GET,produces = {"application/json;charset=UTF-8"})
+	public ResponseEntity<byte[]>  getDownUrl(){
+		byte[] body = zbService.downUrl();
+		HttpHeaders headers = new HttpHeaders();
+	    //headers.add("Content-Disposition", "attchement;filename=zhuangbidashi.apk");
+	    headers.add("content-type", "application/vnd.android.package-archive");
+	    HttpStatus statusCode = HttpStatus.OK;
+	    ResponseEntity<byte[]> entity = new ResponseEntity<byte[]>(body, headers, statusCode);
+	    return entity;
+	}
 
 	
 }
